@@ -114,6 +114,9 @@
 .logo {
   height: 1em;
 }
+.head-example {
+  background-color: gray;
+}
 
 @media (max-width: 600px) {
   .grid {
