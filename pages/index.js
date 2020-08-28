@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import { Button, Badge } from 'antd'
+import { Button, Empty } from 'antd'
 
 export default function Home() {
   return (
@@ -27,10 +27,7 @@ export default function Home() {
           <Button type="link">Link Button</Button>
         </div>
         <div>
-          <span>Badge</span>
-          <Badge count={5}>
-            <a href="#" className="head-example" />
-          </Badge>
+          <Empty />
         </div>
       </main>
 
