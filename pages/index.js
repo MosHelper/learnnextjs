@@ -1,8 +1,26 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import { Button, Empty } from 'antd'
+import { Button, Empty, Skeleton, Table } from 'antd'
+import Axios from 'axios';
 
-export default function Home() {
+export async function getServerSideProps() {
+  try {
+    const { data } = await Axios.get(`https://notesapp-lake.vercel.app/api/notes`)
+    // Pass data to the page via props
+    return { props: { data: data.data } }
+  } catch (error) {
+    // Pass data to the page via props
+    return { props: { data: [] } }
+  }
+}
+
+export default function Home({ data }) {
+  const cols = [
+    {
+      title: 'Title',
+      dataIndex: 'title'
+    }
+  ];
   return (
     <div className={styles.container}>
       <Head>
@@ -19,28 +37,14 @@ export default function Home() {
           Get started by editing{' '}
           <code className={styles.code}>pages/index.js</code>
         </p>
-        <div className="text-center">
-          <Button type="primary">Primary Button</Button>
-          <Button>Default Button</Button>
-          <Button type="dashed">Dashed Button</Button>
-          <Button type="text">Text Button</Button>
-          <Button type="link">Link Button</Button>
-        </div>
         <div>
-          <Empty />
+          {
+            data.length === 0
+              ? <Empty />
+              : <Table dataSource={data} columns={cols} />
+          }
         </div>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
   )
 }
