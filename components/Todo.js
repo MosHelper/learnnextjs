@@ -1,10 +1,12 @@
 import styles from "../styles/todo.module.css";
-import { Tooltip, Button, Popconfirm } from "antd";
+import { Button, Popconfirm, Spin } from "antd";
 import { DeleteOutlined, CheckOutlined } from "@ant-design/icons";
+import { useState } from "react";
 
 const Todo = ({ todo, update }) => {
-
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const todoComplete = async () => {
+        setIsSubmitting(true);
         try {
             const res = await fetch(`/api/todos/${todo._id}/complete`, {
                 method: 'PUT',
@@ -14,12 +16,15 @@ const Todo = ({ todo, update }) => {
                 }
             })
             update();
+            setIsSubmitting(false);
+
         } catch (error) {
             console.log(error);
         }
     }
 
     const onDelete = async () => {
+        setIsSubmitting(true);
         try {
             await fetch(`/api/todos/${todo._id}`, {
                 method: 'DELETE',
@@ -29,6 +34,8 @@ const Todo = ({ todo, update }) => {
                 }
             })
             update();
+            setIsSubmitting(false);
+
         } catch (error) {
             console.log(error);
         }
@@ -37,19 +44,28 @@ const Todo = ({ todo, update }) => {
     return (
         <div className={styles.todo}>
             {
-                todo.isCompleted
-                    ? <>
-                        <Button disabled shape="circle" icon={<CheckOutlined />} />
-                        <span className={styles.completed}>{todo.task}</span>
-                    </>
+                isSubmitting
+                    ? <div style={{ width: "100%", textAlign: "center" }}>
+                        <Spin />
+                    </div>
                     : <>
-                        <Button shape="circle" onClick={todoComplete} icon={<CheckOutlined />} />
-                        <span>{todo.task}</span>
+                        {
+                            todo.isCompleted
+                                ? <>
+                                    <Button disabled shape="circle" icon={<CheckOutlined />} />
+                                    <span className={styles.completed}>{todo.task}</span>
+                                </>
+                                : <>
+                                    <Button shape="circle" onClick={todoComplete} icon={<CheckOutlined />} />
+                                    <span>{todo.task}</span>
+                                </>
+                        }
+                        <Popconfirm title="Are you sure delete this task?" onConfirm={onDelete}>
+                            <Button shape="circle" type="text" icon={<DeleteOutlined />} />
+                        </Popconfirm>
                     </>
             }
-            <Popconfirm title="Are you sure delete this task?" onConfirm={onDelete}>
-                <Button shape="circle" type="text" icon={<DeleteOutlined />} />
-            </Popconfirm>
+
         </div>
     )
 }
