@@ -53,7 +53,7 @@ const TodoList = () => {
             <div style={{ margin: '10px 20px' }}>
                 {
                     isSubmitting
-                        ? <Spin style={{ textAlign: "center" }} />
+                        ? <Spin style={{ textAlign: "center",width: "100%" }} />
                         : <>
                             <Form onFinish={onFinish} validateMessages={validateMessages}>
                                 <Form.Item name="task" label="Task" rules={[{ required: true }]}>
