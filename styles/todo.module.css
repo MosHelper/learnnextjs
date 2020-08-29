@@ -1,0 +1,20 @@
+.todo {
+    padding: 10px 20px;
+    background: #00000005;
+    margin: 10px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+.todo > span {
+    margin-left: 10px;
+    margin-right: auto;
+    font-size: x-large;
+}
+.completed {
+    color: gray;
+    text-decoration: line-through;
+}
+.todo:hover {
+    background: #00000007;
+}

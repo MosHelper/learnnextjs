@@ -1,7 +1,15 @@
+import Head from "next/head";
+import { PageHeader } from "antd";
+import TodoList from "../components/TodoList";
+
 const Home = () => {
   return (
     <div>
-      <h1>Hello World</h1>
+      <Head>
+        <title>TodoApp: with next.js</title>
+      </Head>
+      <PageHeader title="Todo App" subTitle="with next.js" />
+      <TodoList />
     </div>
   )
 }
