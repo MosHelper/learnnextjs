@@ -2,6 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { Button, Empty, Skeleton, Table } from 'antd'
 import Axios from 'axios';
+import Link from 'next/link';
 
 export async function getServerSideProps() {
   try {
@@ -32,6 +33,9 @@ export default function Home({ data }) {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+        <Link href="/about">
+          <a>About Page</a>
+        </Link>
 
         <p className={styles.description}>
           Get started by editing{' '}
