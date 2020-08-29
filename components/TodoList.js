@@ -1,6 +1,6 @@
 import useSWR, { mutate } from "swr"
 import Todo from "./Todo"
-import { Skeleton, Input, Form, Spin } from "antd";
+import { Skeleton, Input, Form, Spin, Empty } from "antd";
 import { useState } from "react";
 
 const fetcher = url => fetch(url).then(res => res.json());
@@ -63,13 +63,18 @@ const TodoList = () => {
                         </>
                 }
             </div>
-            <div>
-                {
-                    data.todos.map(todo => (
-                        <Todo key={todo._id} todo={todo} update={refresh} />
-                    ))
-                }
-            </div>
+            {
+                data.todos.length === 0
+                    ? <Empty />
+                    : <div>
+                        {
+                            data.todos.map(todo => (
+                                <Todo key={todo._id} todo={todo} update={refresh} />
+                            ))
+                        }
+                    </div>
+            }
+
         </>
     )
 }
