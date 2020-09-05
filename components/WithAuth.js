@@ -5,8 +5,11 @@ const WithAuth = (Component) => {
 
     return props => {
         const [session, loading] = useSession()
-        return session ? <Component {...props} session={session} />
-            : <AccessN />
+        return loading
+            ? <></>
+            : session
+                ? <Component {...props} session={session} />
+                : <AccessN />
     }
 }
 
