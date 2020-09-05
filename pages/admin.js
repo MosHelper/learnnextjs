@@ -1,11 +1,11 @@
+import { getSession } from 'next-auth/client'
 import WithAuth from '../components/WithAuth';
 
-
 const Admin = () => {
-
     return (
-        <div>Secret Page......</div>
+        <div>
+            <h1>Secret Page......</h1>
+        </div>
     )
 }
-
 export default WithAuth(Admin);

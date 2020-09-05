@@ -23,7 +23,7 @@ const Home = () => {
       </>}
       <PageHeader title="Todo App" subTitle="with next.js" />
       <TodoList />
-      <Link href="/admin">
+      <Link href="/admin/home">
         <a>Admin</a>
       </Link>
     </div>
