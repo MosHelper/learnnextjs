@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import { PageHeader } from "antd";
 import TodoList from "../components/TodoList";
 import React from 'react'
@@ -22,6 +23,9 @@ const Home = () => {
       </>}
       <PageHeader title="Todo App" subTitle="with next.js" />
       <TodoList />
+      <Link href="/admin">
+        <a>Admin</a>
+      </Link>
     </div>
   )
 }
