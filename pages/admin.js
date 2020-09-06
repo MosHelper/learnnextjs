@@ -1,4 +1,3 @@
-import { getSession } from 'next-auth/client'
 import WithAuth from '../components/WithAuth';
 
 const Admin = () => {
